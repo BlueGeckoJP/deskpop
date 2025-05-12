@@ -18,9 +18,4 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
 
-    if os.name == "posix":
-        import set_window_below
-        winId = window.winId()
-        set_window_below.set_window_below(int(winId))
-
     app.exec()
