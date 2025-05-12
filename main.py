@@ -1,3 +1,5 @@
+import os
+
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
 
@@ -8,9 +10,17 @@ class MainWindow(QMainWindow):
         self.setWindowFlags(Qt.WindowType.WindowStaysOnBottomHint | Qt.WindowType.FramelessWindowHint)
 
 if __name__ == "__main__":
+    if os.name == "posix":
+        os.environ["QT_QPA_PLATFORM"] = "xcb"
+
     app = QApplication()
 
     window = MainWindow()
     window.show()
+
+    if os.name == "posix":
+        import set_window_below
+        winId = window.winId()
+        set_window_below.set_window_below(int(winId))
 
     app.exec()
