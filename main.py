@@ -2,10 +2,10 @@ import os
 import sys
 import tomllib
 
-from PySide6.QtWidgets import *
-from PySide6.QtCore import *
-from PySide6.QtMultimediaWidgets import QVideoWidget
+from PySide6.QtCore import Qt, QTimer, QUrl
 from PySide6.QtMultimedia import QAudioOutput, QMediaPlayer
+from PySide6.QtMultimediaWidgets import QVideoWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 
 media_path = None
 
@@ -19,7 +19,9 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
 
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        self.setWindowFlags(Qt.WindowType.WindowStaysOnBottomHint | Qt.WindowType.FramelessWindowHint)
+        self.setWindowFlags(
+            Qt.WindowType.WindowStaysOnBottomHint | Qt.WindowType.FramelessWindowHint
+        )
 
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
@@ -64,6 +66,7 @@ def load_config_toml():
         else:
             print("No 'media_path' found in config file.")
             exit(1)
+
 
 if __name__ == "__main__":
     if os.name == "posix":
